@@ -129,7 +129,7 @@ public class BoardDao {
 			Class.forName(driverName);	// jdbc 드라이버 로딩
 			conn = DriverManager.getConnection(url, user, pass); // DB연동 커넥션 생성
 			pstmt = conn.prepareStatement(sql); //sql객체 생성
-			pstmt.setString(1, "boardNum");
+			pstmt.setString(1, boardNum);
 			
 			rs = pstmt.executeQuery(); //sql 실행
 			
@@ -173,8 +173,41 @@ public class BoardDao {
 		return dto;
 	}
 	
-	public void modify(String bid,String bname, String btitle, String bcontent) {
+	public void modify(String bname, String btitle, String bcontent,String bid) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		
+		String sql = "UPDATE freeboard SET bname=?, btitle=?, bcontent=? WHERE bid=?";
+		
+		try {
+			Class.forName(driverName);	// jdbc 드라이버 로딩
+			conn = DriverManager.getConnection(url, user, pass); // DB연동 커넥션 생성
+			pstmt = conn.prepareStatement(sql); //sql객체 생성
+			pstmt.setString(1, bname);
+			pstmt.setString(2, btitle);
+			pstmt.setString(3, bcontent);
+			pstmt.setString(4, bid);
+			
+			pstmt.executeUpdate(); //sql 실행
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 }
