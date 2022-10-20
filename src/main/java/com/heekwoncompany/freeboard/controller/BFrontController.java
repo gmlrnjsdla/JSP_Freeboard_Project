@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.heekwoncompany.freeboard.command.BCommand;
 import com.heekwoncompany.freeboard.command.BcontentCommand;
+import com.heekwoncompany.freeboard.command.BdeleteCommand;
 import com.heekwoncompany.freeboard.command.BlistCommand;
 import com.heekwoncompany.freeboard.command.BmodifyCommand;
 import com.heekwoncompany.freeboard.command.BwriteCommand;
@@ -109,6 +110,16 @@ public class BFrontController extends HttpServlet {
 			System.out.println("modify.do 요청!");
 			
 			command = new BmodifyCommand();
+			command.execute(request, response);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/list.do");
+			dispatcher.forward(request, response);
+		}
+		
+		else if(comm.equals("/delete.do")) {
+			System.out.println("delete.do 요청!");
+			
+			command = new BdeleteCommand();
 			command.execute(request, response);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/list.do");

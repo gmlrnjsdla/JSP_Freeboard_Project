@@ -33,7 +33,7 @@
 		<tr>
 			<td colspan="2" align="center">
 				<input type="button" value="수정" onclick="javascript:window.location='content_modify.do?bid=${content.bid}'">
-				<input type="button" value="삭제">
+				<input type="button" value="삭제" onclick="javascript:window.location='delete.do?bid=${content.bid}'">
 				<input type="button" value="목록" onclick="javascript:window.location='list.do'">
 			</td>
 		</tr>
