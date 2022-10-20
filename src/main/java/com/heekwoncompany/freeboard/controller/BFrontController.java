@@ -63,6 +63,7 @@ public class BFrontController extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/list.do");
 			dispatcher.forward(request, response);
 		}
+		
 		else if(comm.equals("/list.do")) {
 			System.out.println("list.do 요청!");
 			
@@ -73,6 +74,13 @@ public class BFrontController extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/list.jsp");
 			dispatcher.forward(request, response);
 			// 셋팅된 글 리스트 전송
+		}
+		
+		else if(comm.equals("/write_form.do")) {
+			System.out.println("write_form.do 요청!");
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/write_form.jsp");
+			dispatcher.forward(request, response);
 		}
 
 	

@@ -28,6 +28,11 @@
 			<td>${dto.bhit }</td>
 		</tr>
 		</c:forEach>
+		<tr>
+			<td colspan="5" align="right">
+				<input type="button" value="끌쓰기" onclick="javascript:window.location='write_form.do'">
+			</td>
+		</tr>
 	</table>
 </body>
 </html>
