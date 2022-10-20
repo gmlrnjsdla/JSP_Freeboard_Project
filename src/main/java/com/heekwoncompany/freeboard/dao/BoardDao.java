@@ -118,6 +118,8 @@ public class BoardDao {
 	
 	public BoardDto content_view(String boardNum) {
 		
+		upHit(boardNum);
+		
 		String sql = "SELECT * FROM freeboard WHERE bid=?";
 		
 		BoardDto dto = null;
@@ -227,7 +229,7 @@ public class BoardDao {
 			pstmt.setString(1, boardNum);
 			
 			
-			pstmt.executeUpdate();//수정 성공이면 1이 반환, 아니면 다른 값 반환
+			pstmt.executeUpdate();
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -247,9 +249,40 @@ public class BoardDao {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
-		
+		}		
 	}
 	
+	private void upHit(String bid) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "UPDATE freeboard SET bhit=bhit+1 WHERE bid=?";
+		
+		try {
+			Class.forName(driverName);	// jdbc 드라이버 로딩
+			conn = DriverManager.getConnection(url, user, pass); // DB연동 커넥션 생성
+			pstmt = conn.prepareStatement(sql); //sql객체 생성
+			pstmt.setString(1, bid);
+			
+			pstmt.executeUpdate(); //sql 실행
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 }
