@@ -210,7 +210,7 @@ public class BoardDao {
 		}
 	}
 	
-	public void delete(String bid) {
+	public void delete(String boardNum) {
 		
 		
 		Connection conn = null;
@@ -224,7 +224,7 @@ public class BoardDao {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, bid);
+			pstmt.setString(1, boardNum);
 			
 			
 			pstmt.executeUpdate();//수정 성공이면 1이 반환, 아니면 다른 값 반환
